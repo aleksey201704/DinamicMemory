@@ -14,6 +14,8 @@ void Print(int** arr, const int rows, const int cols);
 
 int* push_back(int arr[], int& n, int value);
 int* push_front(int arr[], int& n, int value);
+//int* insert(int arr[] ,int& idrows, int& idcols);
+
 int* pop_back(int arr[], int& n);
 
 int** push_row_back(int** arr, int& rows, const int cols);
@@ -56,10 +58,17 @@ void main()
 	//Print(arr, n);	//Runtime error  
 #endif // DYNAMIC_MEMORY_1
 
-	int rows;	//Количество строк
-	int cols;	//Количество элементов строки (столбцов)
-	std::cout << "Введите количество строк: "; cin >> rows;
-	cout << "Введите количество элементов строки: "; cin >> cols;
+	int rows=3;	//Количество строк	
+	int cols=5;	//Количество элементов строки (столбцов)
+	int idrows;
+	int idcols;
+
+	std::cout << "Введите номер строк: "; cin >> idrows;
+	cout << "Введите номер столбика: "; cin >> idcols;
+
+
+	/*std::cout << "Введите количество строк: "; cin >> rows;
+	cout << "Введите количество элементов строки: "; cin >> cols;*/
 
 	int** arr = allocate(rows, cols);
 
@@ -76,9 +85,19 @@ void main()
 		arr[i][cols - 1] = rand();
 	}
 	Print(arr, rows, cols);
-
+	
+	
+	cout << "\n-----------------------------------------\n";
+	cout << "Вставляет значение в массив по указанному индексу " << endl;
+	arr[idrows][idcols] = rand () % 100;
+	cout <<"[" << idrows << "," << idcols << "] = " << arr[idrows][idcols] << endl;
+	
+	Print(arr, rows, cols);
+	
 	clear(arr, rows);
 }
+
+
 
 int** allocate(const int rows, const int cols)
 {
