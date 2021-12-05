@@ -14,12 +14,14 @@ void Print(int** arr, const int rows, const int cols);
 
 int* push_back(int arr[], int& n, int value);
 int* push_front(int arr[], int& n, int value);
-//int* insert(int arr[] ,int& idrows, int& idcols);
-
-int* pop_back(int arr[], int& n);
+void insert(int** arr,int& idrows, int& idcols);
 
 int** push_row_back(int** arr, int& rows, const int cols);
+//int** push_row_front(int** arr, int& rows, const int cols);
+
 void push_col_back(int** arr, const int rows, int& cols);
+
+int* pop_back(int arr[], int& n);
 
 //#define DYNAMIC_MEMORY_1
 #define DYNAMIC_MEMORY_2
@@ -89,14 +91,27 @@ void main()
 	
 	cout << "\n-----------------------------------------\n";
 	cout << "Вставляет значение в массив по указанному индексу " << endl;
-	arr[idrows][idcols] = rand () % 100;
-	cout <<"[" << idrows << "," << idcols << "] = " << arr[idrows][idcols] << endl;
 	
+	insert(arr, idrows, idcols);
 	Print(arr, rows, cols);
 	
-	clear(arr, rows);
+	cout << "\n-----------------------------------------\n";
+	
+	int** buffer = new int* [rows + 1]{};
+	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
+	delete[] arr;
+	buffer[0] = new int[cols]; // создаем новый одинарный массив
+	FillRand(buffer[0], cols, 100, 500);
+	Print(buffer, rows, cols);
+	
+	//clear(arr, rows);
 }
 
+void insert(int** arr, int& idrows, int& idcols)
+{
+	arr[idrows][idcols] = rand () % 100;
+	cout <<"[" << idrows << "," << idcols << "] = " << arr[idrows][idcols] << endl;
+}
 
 
 int** allocate(const int rows, const int cols)
