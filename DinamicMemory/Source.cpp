@@ -17,7 +17,7 @@ int* push_front(int arr[], int& n, int value);
 void insert(int** arr,int& idrows, int& idcols);
 
 int** push_row_back(int** arr, int& rows, const int cols);
-//int** push_row_front(int** arr, int& rows, const int cols);
+int** push_row_front(int** arr, int& rows, const int cols);
 
 void push_col_back(int** arr, const int rows, int& cols);
 
@@ -62,11 +62,11 @@ void main()
 
 	int rows=3;	//Количество строк	
 	int cols=5;	//Количество элементов строки (столбцов)
-	int idrows;
-	int idcols;
+	int idrows=2;
+	int idcols=2;
 
-	std::cout << "Введите номер строк: "; cin >> idrows;
-	cout << "Введите номер столбика: "; cin >> idcols;
+	/*std::cout << "Введите номер строк: "; cin >> idrows;
+	cout << "Введите номер столбика: "; cin >> idcols;*/
 
 
 	/*std::cout << "Введите количество строк: "; cin >> rows;
@@ -76,36 +76,63 @@ void main()
 
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
+
 	cout << "\n-----------------------------------------\n";
+
+	cout << "Вставляет значение в массив по указанному индексу " << endl;
+	insert(arr, idrows, idcols);
+	Print(arr, rows, cols);
+
+	cout << "\n-----------------------------------------\n";
+	cout << "Добавляет строку в конец двумерного динамического массива" << endl;
 	arr = push_row_back(arr, rows, cols);
 	FillRand(arr[rows - 1], cols, 100, 1000);
 	Print(arr, rows, cols);
+		
 	cout << "\n-----------------------------------------\n";
+	
+	cout << "Добавляет строку в начало двумерного динамического массива" << endl;
+	arr = push_row_front(arr, rows, cols);
+	FillRand(arr[0], cols, 100, 500);
+	
+	Print(arr, rows, cols);
+	
+	cout << "\n-----------------------------------------\n";
+
 	push_col_back(arr, rows, cols);
 	for (int i = 0; i < rows; i++)
 	{
 		arr[i][cols - 1] = rand();
 	}
 	Print(arr, rows, cols);
-	
-	
-	cout << "\n-----------------------------------------\n";
-	cout << "Вставляет значение в массив по указанному индексу " << endl;
-	
-	insert(arr, idrows, idcols);
-	Print(arr, rows, cols);
-	
-	cout << "\n-----------------------------------------\n";
+
+
+	clear(arr, rows);
+}
+int** push_row_back(int** arr, int& rows, const int cols)
+{
 	
 	int** buffer = new int* [rows + 1]{};
 	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
 	delete[] arr;
-	buffer[0] = new int[cols]; // создаем новый одинарный массив
-	FillRand(buffer[0], cols, 100, 500);
-	Print(buffer, rows, cols);
-	
-	//clear(arr, rows);
+	buffer[rows] = new int[cols] {};
+	rows++;
+	return buffer;
 }
+
+int** push_row_front(int** arr, int& rows, const int cols) 
+{
+	
+	int** buffer = new int* [rows + 1]{};
+	
+	for (int i = 1; i < rows+1; i++)buffer[i] = arr[i-1];
+	delete[] arr;
+	buffer[0] = new int[cols] {}; // создаем новый одинарный массив
+	rows++;
+	return buffer;
+}
+
+
 
 void insert(int** arr, int& idrows, int& idcols)
 {
@@ -218,15 +245,7 @@ int* pop_back(int arr[], int& n)
 	return buffer;
 }
 
-int** push_row_back(int** arr, int& rows, const int cols)
-{
-	int** buffer = new int* [rows + 1]{};
-	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
-	delete[] arr;
-	buffer[rows] = new int[cols] {};
-	rows++;
-	return buffer;
-}
+
 void push_col_back(int** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
