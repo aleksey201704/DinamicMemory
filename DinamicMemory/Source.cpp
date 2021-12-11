@@ -17,7 +17,7 @@ int* push_front(int arr[], int& n, int value);
 void insert(int** arr,int& idrows, int& idcols);
 
 int* pop_back(int arr[], int& n);
-int* pop_front(int arr[], int& n);
+//int* pop_front(int arr[], int& n);
 
 int** pop_row_back(int** arr,int& rows,int& cols);
 int** pop_row_front(int** arr, int& rows);
@@ -110,6 +110,33 @@ void main()
 	cout << "”дал€ет строку с начала двумерного динамического массива" << endl;
 	arr = pop_row_front(arr, rows);
 	Print(arr, rows, cols);
+	cout << "\n-----------------------------------------\n";
+	cout << "ƒобавл€ет строку в двумерный динамический массив по указанному индексу = ";
+	//cin >> idrows;
+	//
+	//rows++;
+	////cout << rows;
+	//
+	//int* buffer = new int [cols] {};
+	//for (int j = 0; j < cols; j++) buffer[j] = arr[idrows][j];
+	//delete[] arr[idrows];
+
+	//for (int t = 0; t < cols; t++) arr[idrows][t] = 0;
+	//
+	//
+	////arr[idrows + 1] = buffer;
+	////cout << *(arr[idrows + 2]) << "---";
+
+	//for (int i = idrows; i < rows; i++)
+	//{
+	//	int* bufferPost = new int [cols] {};
+	//	for (int j = 0; j < cols; j++) bufferPost[j] = arr[i][j];
+	//	delete[] arr[i];
+	//	arr[i] = bufferPost;		
+	//}
+	//
+	//
+	//Print(arr, rows, cols);
 
 	cout << "\n-----------------------------------------\n";
 	cout << "ƒобавл€ет столбец в конец двумерного динамического массива" << endl;
